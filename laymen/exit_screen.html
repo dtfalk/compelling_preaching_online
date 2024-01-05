@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            display: block;
+            font-family: 'Arial', sans-serif;
+            background-color: lightblue;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            display: block;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            display: block;
+            color: #3498db;
+        }
+
+        p {
+            display: block;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<main id="instructionsSection">
+    <p>The experiment is now over. Thank you for participating.</p>
+    <p>Press the Finish button below and exit your browser to terminate the experiment.</p>
+</main>
+
+<br> <br> <br>
+<center>
+    <button onclick="submitForm()">Finish</button>
+</center>
+<br>
+
+<script>
+    function submitForm() {
+        // Hide the header and instructions sections
+        document.getElementById("instructionsSection").style.display = "none";
+        // Hide the submit button
+        document.querySelector("button").style.display = "none";
+    }
+</script>
+
+</body>
+</html>

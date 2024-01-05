@@ -1,0 +1,255 @@
+<!-- Sources: https://blog.hubspot.com/website/html-text-box, chatgpt-3.5 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      overflow: auto;
+    }
+    #background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: lightskyblue;
+      z-index: -1;
+    }
+    .questionnaire-container {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 20px;
+      background-color: white;
+      z-index: 1;
+      }
+      h1{
+        text-align: center;
+      }
+      button{
+        justify-content: center;
+      }
+  </style>
+</head>
+<body onload="showQuestionnaire()">
+  <div id="background"></div>
+  <div id="questionnaireContainer" class="questionnaire-container">
+  </div>
+
+  <script>
+    let submissionCount = 0;
+    let errorMessageAdded = false;
+
+    function showQuestionnaire() {
+      const questionnaireContainer = document.getElementById('questionnaireContainer');
+      questionnaireContainer.innerHTML = generateQuestionnaireHTML();
+
+      // Display the questionnaire
+      questionnaireContainer.style.display = 'block';
+    }
+
+    function generateQuestionnaireHTML() {
+      // You can customize the questionnaire HTML generation based on your requirements
+      return `
+        <h1>Homily Review</h1>
+
+        <!-- Compelling-ness -->
+        <p>1. How compelling did you find this homily?</p>
+        <label>
+          <input type="checkbox" name="compelling" value="1" onclick="uncheckOthers('compelling', this)"> Not at all
+        </label>
+        <label>
+          <input type="checkbox" name="compelling" value="2" onclick="uncheckOthers('compelling', this)"> A little
+        </label>
+        <label>
+          <input type="checkbox" name="compelling" value="3" onclick="uncheckOthers('compelling', this)"> Somewhat
+        </label>
+        <label>
+          <input type="checkbox" name="compelling" value="4" onclick="uncheckOthers('compelling', this)"> Very
+        </label>
+        <label>
+          <input type="checkbox" name="compelling" value="5" onclick="uncheckOthers('compelling', this)"> Extremely
+        </label> 
+        <br> <br>
+        
+
+        <!-- Understanding-->
+        <p>2. Do you understand the message being preached?</p>
+        <label>
+          <input type="checkbox" name="understanding" value="1" onclick="uncheckOthers('understanding', this)"> Not at all
+        </label>
+        <label>
+          <input type="checkbox" name="understanding" value="2" onclick="uncheckOthers('understanding', this)"> A little
+        </label>
+        <label>
+          <input type="checkbox" name="understanding" value="3" onclick="uncheckOthers('understanding', this)"> Somewhat
+        </label>
+        <label>
+          <input type="checkbox" name="understanding" value="4" onclick="uncheckOthers('understanding', this)"> A lot
+        </label>
+        <label>
+          <input type="checkbox" name="understanding" value="5" onclick="uncheckOthers('understanding', this)"> Completely
+        </label> 
+        <br> <br>
+
+        <!-- Agreement-->
+        <p>3. Do you agree with the homily's message?</p>
+        <label>
+            <input type="checkbox" name="agreement" value="1" onclick="uncheckOthers('goals', this)"> Not at all
+        </label>
+        <label>
+          <input type="checkbox" name="agreement" value="2" onclick="uncheckOthers('goals', this)"> A little
+        </label>
+        <label>
+          <input type="checkbox" name= "agreement" value="3" onclick="uncheckOthers('goals', this)"> Somewhat
+        </label>
+        <label>
+          <input type="checkbox" name="agreement" value="4" onclick="uncheckOthers('goals', this)"> A lot
+        </label>
+        <label>
+          <input type="checkbox" name="agreement" value="5" onclick="uncheckOthers('goals', this)"> Completely
+        </label>
+        <br> <br>
+
+        <!-- Change in Thinking-->
+        <p>4. Did the homily change your thinking about this message?</p>
+        <label>
+            <input type="checkbox" name="thinking" value="1" onclick="uncheckOthers('goals', this)"> Not at all
+        </label>
+        <label>
+          <input type="checkbox" name="thinking" value="2" onclick="uncheckOthers('goals', this)"> A little
+        </label>
+        <label>
+          <input type="checkbox" name= "thinking" value="3" onclick="uncheckOthers('goals', this)"> Somewhat
+        </label>
+        <label>
+          <input type="checkbox" name="thinking" value="4" onclick="uncheckOthers('goals', this)"> A lot
+        </label>
+        <label>
+          <input type="checkbox" name="thinking" value="5" onclick="uncheckOthers('goals', this)"> Completely
+        </label>
+        <br> <br>
+
+        <!-- Change in Feelings -->
+        <p>5. Did the homily change your feelings in any way?</p>
+        <label>
+            <input type="checkbox" name="feeling" value="1" onclick="uncheckOthers('goals', this)"> Not at all
+        </label>
+        <label>
+          <input type="checkbox" name="feeling" value="2" onclick="uncheckOthers('goals', this)"> A little
+        </label>
+        <label>
+          <input type="checkbox" name= "feeling" value="3" onclick="uncheckOthers('goals', this)"> Somewhat
+        </label>
+        <label>
+          <input type="checkbox" name="feeling" value="4" onclick="uncheckOthers('goals', this)"> A lot
+        </label>
+        <label>
+          <input type="checkbox" name="feeling" value="5" onclick="uncheckOthers('goals', this)"> Completely
+        </label>
+
+        </label>
+        <br> <br> <br>
+        <label for="freeform">Additional Comments (optional):</label>
+        <br>
+
+        <textarea id="freeform6" name="freeform" rows="4" cols="50"></textarea>
+
+        
+        <!-- Submit button -->
+        <br> <br> <br>
+        <center>
+          <button onclick="submitForm()">Submit</button>
+        </center>
+        <br>
+      `;
+    }
+
+    // Function to add an error message
+    function addErrorMessage(message) {
+        if (errorMessageAdded){
+          return;
+        }
+        const errorMessage = document.createElement('div');
+        errorMessage.style.color = 'red';
+        errorMessage.textContent = message;
+
+        const questionnaireContainer = document.getElementById('questionnaireContainer');
+        questionnaireContainer.appendChild(errorMessage);
+        errorMessageAdded = true;
+    }
+
+    // Function to remove the error message
+    function removeErrorMessage() {
+        const questionnaireContainer = document.getElementById('questionnaireContainer');
+        const errorMessages = questionnaireContainer.querySelectorAll('.error-message');
+
+        errorMessages.forEach(errorMessage => {
+            questionnaireContainer.removeChild(errorMessage);
+        });
+    }
+    function uncheckOthers(groupName, currentCheckbox) {
+        const checkboxes = document.querySelectorAll(`input[name="${groupName}"]`);
+        checkboxes.forEach(checkbox => {
+          if (checkbox !== currentCheckbox) {
+            checkbox.checked = false;
+          }
+        })
+    };
+    
+    function validateForm() {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        let valid = true;
+        name_dict = {}
+
+        // collect all checkboxes of a given name into a list
+        for (let i = 0; i < checkboxes.length; i++){
+            name = checkboxes[i].name;
+            try {
+                name_dict[name].push(checkboxes[i]);
+            } catch (error){
+                name_dict[name] = [checkboxes[i]];
+            }}
+        
+        for (const [key, value] of Object.entries(name_dict)){
+            let responded = false;
+            for (let i = 0; i < value.length; i++){
+                if (value[i].checked){
+                    responded = true;
+                }}
+            if (!responded){
+                valid = false;
+                break;
+            }
+        }
+        return valid;
+      }
+  
+      function submitForm() {
+        const isValid = validateForm();
+        if (!isValid) {
+            addErrorMessage('You must respond to all of the questions before submitting')
+        }
+        else{
+            document.getElementById('questionnaireContainer').style.display = 'none';
+            window.location.href = "religion_survey.html";
+        }
+      }
+  
+    function uncheckOthers(name, checkbox) {
+        const checkboxes = document.getElementsByName(name);
+  
+        checkboxes.forEach((cb) => {
+          if (cb !== checkbox) {
+            cb.checked = false;
+          }
+        });
+      }
+  </script>
+</body>
+</html>
