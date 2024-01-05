@@ -66,14 +66,14 @@
     }
     function generatePromptHTML() {
         return `
-            <p><b>Were you provided a UserId number?</b></p>
+            <p><b>Would you like the AV or just Audio version?</b></p>
             <label>
-                <input type = "checkbox" name = "experimentType" value = "1" onclick = "uncheckOthers('experimentType', this)"> Yes, I was provided a UserId number.
+                <input type = "checkbox" name = "experimentType" value = "1" onclick = "uncheckOthers('experimentType', this)"> AV
             </label>
             <br>
             <br>
             <label>
-                <input type = "checkbox" name = "experimentType" value = "2" onclick = "uncheckOthers('experimentType', this)"> No, I was not provided a UserId number.
+                <input type = "checkbox" name = "experimentType" value = "2" onclick = "uncheckOthers('experimentType', this)"> Audio
             </label>
 
             <!-- Submit button -->
@@ -133,10 +133,10 @@
             const checkboxes = document.querySelectorAll('input[type="checkbox"]');
             let checkbox = checkboxes[0];
             if (checkbox.value == 1 && checkbox.checked){
-                window.location.href = 'av_or_audio.html';
+                window.location.href = 'expert_av/enter_user_number.html';
             }
             else{
-                window.location.href = 'laymen/experiment_introduction.html'
+                window.location.href = 'expert_audio/enter_user_number.html'
             }
         }
       }
