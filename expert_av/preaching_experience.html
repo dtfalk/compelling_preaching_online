@@ -1,0 +1,257 @@
+<!-- Sources: https://blog.hubspot.com/website/html-text-box, chatgpt-3.5 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      overflow: auto;
+    }
+    #background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: lightblue;
+      z-index: -1;
+    }
+    .questionnaire-container {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 20px;
+      background-color: white;
+      z-index: 1;
+      }
+      h1{
+        text-decoration: underline;
+      }
+  </style>
+</head>
+<body onload="showQuestionnaire()">
+  <div id="background"></div>
+  <div id="questionnaireContainer" class="questionnaire-container">
+  </div>
+
+  <script>
+    let submissionCount = 0;
+    let errorMessageAdded = false;
+
+    function showQuestionnaire() {
+      const questionnaireContainer = document.getElementById('questionnaireContainer');
+      questionnaireContainer.innerHTML = generateQuestionnaireHTML();
+
+      // Display the questionnaire
+      questionnaireContainer.style.display = 'block';
+    }
+
+    function generateQuestionnaireHTML() {
+      // You can customize the questionnaire HTML generation based on your requirements
+      return `
+        <h1>Preaching Experience</h1>
+
+        <!-- Preaching Duration -->
+
+        <p>How many years have you been preaching?</p>
+        <label>
+          <input type="checkbox" name="preaching_duration" value="1" onclick="uncheckOthers('preaching_duration', this)"> Less than 1 year
+        </label> <br>
+        <label>
+          <input type="checkbox" name="preaching_duration" value="2" onclick="uncheckOthers('preaching_duration', this)"> 1 - 5 years
+        </label> <br>
+        <label>
+          <input type="checkbox" name= "preaching_duration" value="3" onclick="uncheckOthers('preaching_duration', this)"> 5 - 10 years
+        </label> <br>
+        <label>
+          <input type="checkbox" name="preaching_duration" value="4" onclick="uncheckOthers('preaching_duration', this)"> 10 - 15 years
+        </label> <br>
+        <label>
+          <input type="checkbox" name="preaching_duration" value="5" onclick="uncheckOthers('preaching_duration', this)"> 15 - 20 years
+        </label> <br>
+        <label>
+          <input type="checkbox" name="preaching_duration" value="6" onclick="uncheckOthers('preaching_duration', this)"> More than 20 years
+        </label> <br> <br>
+        <label for="freeform">Additional Comments (optional):</label>
+        <textarea id="duration_preaching" name="freeform" rows="4" cols="50"></textarea>
+        <br> <br> <br> 
+
+
+        <!-- Teaching Duration -->
+
+        <p>How many years have you been teaching how to preach?</p>
+        <label>
+          <input type="checkbox" name="teaching_duration" value="1" onclick="uncheckOthers('teaching_duration', this)"> Less than 1 year
+        </label> <br>
+        <label>
+          <input type="checkbox" name="teaching_duration" value="2" onclick="uncheckOthers('teaching_duration', this)"> 1 - 5 years
+        </label> <br>
+        <label>
+          <input type="checkbox" name= "teaching_duration" value="3" onclick="uncheckOthers('teaching_duration', this)"> 5 - 10 years
+        </label> <br>
+        <label>
+          <input type="checkbox" name="teaching_duration" value="4" onclick="uncheckOthers('teaching_duration', this)"> 10 - 15 years
+        </label> <br>
+        <label>
+          <input type="checkbox" name="teaching_duration" value="5" onclick="uncheckOthers('teaching_duration', this)"> 15 - 20 years
+        </label> <br>
+        <label>
+          <input type="checkbox" name="teaching_duration" value="6" onclick="uncheckOthers('teaching_duration', this)"> More than 20 years
+        </label> <br> <br>
+        <label for="freeform">Additional Comments (optional):</label>
+        <textarea id="duration_teaching" name="freeform" rows="4" cols="50"></textarea>
+        <br> <br> <br>
+
+
+        <!-- Preaching Regularity -->
+
+        <p>How often do you preach currently?</p>
+        <label>
+          <input type="checkbox" name="preaching_regularity" value="1" onclick="uncheckOthers('preaching_regularity', this)"> Several times a day
+        </label>
+        <br>
+        <label>
+          <input type="checkbox" name="preaching_regularity" value="2" onclick="uncheckOthers('preaching_regularity', this)"> Once a day
+        </label>
+        <br>
+        <label>
+          <input type="checkbox" name= "preaching_regularity" value="3" onclick="uncheckOthers('preaching_regularity', this)"> A few times a week
+        </label>
+        <br>
+        <label>
+          <input type="checkbox" name="preaching_regularity" value="4" onclick="uncheckOthers('preaching_regularity', this)"> Once a week
+        </label>
+        <br>
+        <label>
+          <input type="checkbox" name="preaching_regularity" value="5" onclick="uncheckOthers('preaching_regularity', this)"> A few times a month
+        </label>
+        <br>
+        <label>
+          <input type="checkbox" name= "preaching_regularity" value="6" onclick="uncheckOthers('preaching_regularity', this)"> Once a month
+        </label>
+        <br>
+        <label>
+          <input type="checkbox" name="preaching_regularity" value="7" onclick="uncheckOthers('preaching_regularity', this)"> A few times a year
+        </label>
+        <br>
+        <label>
+          <input type="checkbox" name= "preaching_regularity" value="8" onclick="uncheckOthers('preaching_regularity', this)"> Once a year
+        </label>
+        <br>
+        <label>
+          <input type="checkbox" name="preaching_regularity" value="9" onclick="uncheckOthers('preaching_regularity', this)"> Seldom
+        </label>
+        <br>
+        <label>
+          <input type="checkbox" name="preaching_regularity" value="10" onclick="uncheckOthers('preaching_regularity', this)"> Never
+        </label>
+        <br> <br>
+        <label for="freeform">Additional Comments (optional):</label>
+        <textarea id="duration_preaching" name="freeform" rows="4" cols="50"></textarea>
+        <br> <br> <br>
+
+
+        </label> <br>
+        <label for="freeform">Other valuable information relating to your preaching/teaching experience:</label> <br>
+        <br>
+
+        <textarea id="freeform6" name="freeform" rows="4" cols="50"></textarea>
+
+
+        <!-- Submit button -->
+        <br>
+        <br>
+        <center>
+          <button onclick="submitForm()">Submit</button>
+        </center>
+        <br>
+      `;
+    }
+
+    // Function to add an error message
+    function addErrorMessage(message) {
+        if (errorMessageAdded){
+          return;
+        }
+        const errorMessage = document.createElement('div');
+        errorMessage.style.color = 'red';
+        errorMessage.textContent = message;
+
+        const questionnaireContainer = document.getElementById('questionnaireContainer');
+        questionnaireContainer.appendChild(errorMessage);
+        errorMessageAdded = true;
+    }
+
+    // Function to remove the error message
+    function removeErrorMessage() {
+        const questionnaireContainer = document.getElementById('questionnaireContainer');
+        const errorMessages = questionnaireContainer.querySelectorAll('.error-message');
+
+        errorMessages.forEach(errorMessage => {
+            questionnaireContainer.removeChild(errorMessage);
+        });
+    }
+    function uncheckOthers(groupName, currentCheckbox) {
+        const checkboxes = document.querySelectorAll(`input[name="${groupName}"]`);
+        checkboxes.forEach(checkbox => {
+          if (checkbox !== currentCheckbox) {
+            checkbox.checked = false;
+          }
+        })
+    };
+    
+    function validateForm() {
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+        let valid = true;
+        name_dict = {}
+
+        // collect all checkboxes of a given name into a list
+        for (let i = 0; i < checkboxes.length; i++){
+            name = checkboxes[i].name;
+            try {
+                name_dict[name].push(checkboxes[i]);
+            } catch (error){
+                name_dict[name] = [checkboxes[i]];
+            }}
+        
+        for (const [key, value] of Object.entries(name_dict)){
+            let responded = false;
+            for (let i = 0; i < value.length; i++){
+                if (value[i].checked){
+                    responded = true;
+                }}
+            if (!responded){
+                valid = false;
+                break;
+            }
+        }
+        return valid;
+      }
+  
+      function submitForm() {
+        const isValid = validateForm();
+        if (!isValid) {
+            addErrorMessage('You must respond to all of the questions before submitting')
+        }
+        else{
+            document.getElementById('questionnaireContainer').style.display = 'none';
+            window.location.href = 'exit_screen.html'
+        }
+      }
+  
+    function uncheckOthers(name, checkbox) {
+        const checkboxes = document.getElementsByName(name);
+  
+        checkboxes.forEach((cb) => {
+          if (cb !== checkbox) {
+            cb.checked = false;
+          }
+        });
+      }
+  </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psychology Experiment Instructions</title>
+    <style>
+        body {
+            display: block;
+            font-family: 'Arial', sans-serif;
+            background-color: lightblue;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            display: block;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            display: block;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+
+<main id="instructionsSection">
+    <p>You will now listen to a homily.</p>
+    <p>Press the "continue" button when you are ready to proceed.</p>
+</main>
+
+<br> <br> <br>
+<center>
+    <button onclick="submitForm()">Continue</button>
+</center>
+<br>
+
+<script>
+    function submitForm() {
+        // Hide the submit button
+        window.location.href = 'show_homily.html';
+    }
+</script>
+
+</body>
+</html>

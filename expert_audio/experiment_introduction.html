@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Psychology Experiment Instructions</title>
+    <style>
+        body {
+            display: block;
+            font-family: 'Arial', sans-serif;
+            background-color: lightblue;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            display: block;
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            display: block;
+            color: #3498db;
+        }
+
+        p {
+            display: block;
+            font-size: 16px;
+            line-height: 1.6;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+<main id="instructionsSection">
+    <p>Welcome to this homily review. Follow the instructions below carefully:</p>
+    <p>You will listen to a number of homilies from different preachers.</p>
+    <p>After listening each homily you will be asked questions about the homily.</p>
+    <p>Please pay attention during all of the homilies and answer all of the questions.</p>
+    <p>After listening to all of the homilies there will be a short additional questionnaire.</p>
+    <p>Thank you for your participation. If you have any questions, please contact us.</p>
+    <p>Press the continue button below to continue to the experiment.</p>
+</main>
+
+<br> <br> <br>
+<center>
+    <button onclick="submitForm()">Continue</button>
+</center>
+<br>
+
+<script>
+    function submitForm() {
+        window.location.href = 'new_homily_wait_screen.html';
+    }
+</script>
+
+</body>
+</html>
