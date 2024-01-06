@@ -28,8 +28,7 @@ Please let me know if you find any bugs, missing questions, misworded questions 
 all suggestions/help is appreciated.
 
 Missing features as of now (1/5/24):
-No functionality for checking word count, 
 User can still reverse through the experiment, 
-No way to iterate through homilies multiple times, 
-User data is not stored, 
-No backend/server support at all
+no way to iterate through homilies multiple times, 
+user data is not stored, 
+no backend/server support at all

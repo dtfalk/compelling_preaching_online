@@ -880,7 +880,7 @@
         </label>
         <br>
         <br>
-        <label for="freeform">Other Valuable Commendations/Reccomendations:</label>
+        <label for="freeform">Other Valuable Commendations/Reccomendations (optional):</label>
         <br>
 
         <textarea id="freeform6" name="freeform" rows="4" cols="50"></textarea>
@@ -894,6 +894,11 @@
         </center>
         <br>
       `;
+    }
+
+    function wordCount(string){
+      const words = string.split(" ");
+      return words.length;
     }
 
     // Function to add an error message
@@ -933,6 +938,10 @@
         let valid = true;
         name_dict = {}
 
+        const response = document.getElementById("message");
+        if (wordCount(response.value) < 50){
+          return false;
+        }
         // collect all checkboxes of a given name into a list
         for (let i = 0; i < checkboxes.length; i++){
             name = checkboxes[i].name;
@@ -959,7 +968,7 @@
       function submitForm() {
         const isValid = validateForm();
         if (!isValid) {
-            addErrorMessage('You must respond to all of the questions before submitting')
+            addErrorMessage('You must respond to all of the questions and meet all word count requirements before submitting')
         }
         else{
             document.getElementById('questionnaireContainer').style.display = 'none';

@@ -30,6 +30,7 @@
       }
       h1{
         text-decoration: underline;
+        text-align: center;
       }
   </style>
 </head>
@@ -54,6 +55,17 @@
       // You can customize the questionnaire HTML generation based on your requirements
       return `
         <h1>Preaching Experience</h1>
+
+        <h1>Instructions </h1>
+        <p>Please respond to the following questions about the homily you were just shown.
+          You are required to respond to all of the required questions before submitting the form.
+          Any question that is not required will have an "(optional)" tag attached to it. 
+          Some questions will ask you to rate a particular feature (underlined above the questions relating to that feature) of the homily on a scale from 1-5 or 1-6.
+          Some questions will require a text entry with a minimum word count which will be specified. 
+          Other questions will be similiar to a 1-5 rating scale, but will give more specific answer choices.
+          </p>
+        
+        <h1> Questions </h1>
 
         <!-- Preaching Duration -->
 
@@ -156,7 +168,7 @@
 
 
         </label> <br>
-        <label for="freeform">Other valuable information relating to your preaching/teaching experience:</label> <br>
+        <label for="freeform">Other valuable information relating to your preaching/teaching experience (optional):</label> <br>
         <br>
 
         <textarea id="freeform6" name="freeform" rows="4" cols="50"></textarea>
