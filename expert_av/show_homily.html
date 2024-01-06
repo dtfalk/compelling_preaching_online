@@ -85,6 +85,7 @@
 <br>
 
 <script>
+    let seconds_achieved = [0];
     let furthestPoint = 0;
     let isSeeking = false;
     const video = document.getElementById('homilyVideo');
@@ -92,7 +93,13 @@
     video.addEventListener('timeupdate', function() {
     setTimeout(function() {
         if ((video.currentTime > furthestPoint)  && !isSeeking) {
-            furthestPoint = video.currentTime;
+            if ((Math.floor(video.currentTime) - 1) in seconds_achieved){
+                furthestPoint = video.currentTime;
+                if (!(Math.floor(video.currentTime) in seconds_achieved)){
+                    seconds_achieved.push(Math.floor(video.currentTime));
+                }
+            }
+
         };
     }, 1);
     });

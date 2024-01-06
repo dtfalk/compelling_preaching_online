@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      overflow: hidden;
+      justify-content: center;
+      align-items: top;
+      height: 100vh;
+    }
+    #background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: lightblue;
+      z-index: -1;
+    }
+    main {
+      display: block;
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+    p {
+      font-size: 16pt;
+      text-align: center;
+    }
+      
+
+  </style>
+</head>
+<body>
+  <div id="background"></div>
+  <div id="prolificIdForm">
+    <!-- retrieve the prolific id -->
+    <main>
+    <p><b>Enter your prolific id number and then click submit</b></p>
+    <br>
+    <form id="prolificForm">
+      <center>
+      <label for="prolificid">User ID:</label>
+      <input type="text" id="prolificid" name="prolificid"><br><br>
+        <input type="button" value="Submit" onclick="validateUser()">
+      </center>
+    </form>
+    <br>
+
+    <p id="errorMessage" style="color: red;"></p>
+  </main>
+  </div>
+
+  <script>
+    async function validateUser() {
+      const prolificId = document.getElementById('prolificid').value;
+      const errorMessage = document.getElementById('errorMessage');
+
+      if (prolificId !== '') {
+        errorMessage.textContent = ''; // Clear any previous error message
+        await new Promise(resolve => setTimeout(resolve, 0)); // Introduce a delay using Promise
+        redirectToIntroduction();
+      } else {
+        errorMessage.textContent = 'Please provide a valid Prolific ID before continuing (enter anything if you are just testing)';
+      }
+    }
+
+    function redirectToIntroduction() {
+      window.location.href = 'experiment_introduction.html';
+    }
+  </script>
+</body>
+</html>
+
+

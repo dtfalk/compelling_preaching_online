@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Psychology Experiment Instructions</title>
     <style>
         .audio-container {
-            width: 50%; /* or any width you prefer */
+            width: 80%; /* or any width you prefer */
             border: 1px solid #000; /* optional: for styling */
             margin: auto;
             position: relative; /* for positioning the audio element */
@@ -84,6 +83,7 @@
 <br>
 
 <script>
+    let seconds_achieved = [0];
     let furthestPoint = 0;
     let isSeeking = false;
     const audio = document.getElementById('homilyAudio');
@@ -91,7 +91,13 @@
     audio.addEventListener('timeupdate', function() {
     setTimeout(function() {
         if ((audio.currentTime > furthestPoint)  && !isSeeking) {
-            furthestPoint = audio.currentTime;
+            if ((Math.floor(audio.currentTime) - 1) in seconds_achieved){
+                furthestPoint = audio.currentTime;
+                if (!(Math.floor(audio.currentTime) in seconds_achieved)){
+                    seconds_achieved.push(Math.floor(audio.currentTime));
+                }
+            }
+
         };
     }, 1);
     });

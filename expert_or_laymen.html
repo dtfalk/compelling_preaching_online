@@ -66,14 +66,14 @@
     }
     function generatePromptHTML() {
         return `
-            <p><b>Were you provided a UserId number?</b></p>
+            <p><b>Were you provided a UserId number or did you access this page through Prolific?</b></p>
             <label>
-                <input type = "checkbox" name = "experimentType" value = "1" onclick = "uncheckOthers('experimentType', this)"> Yes, I was provided a UserId number.
+                <input type = "checkbox" name = "experimentType" value = "1" onclick = "uncheckOthers('experimentType', this)"> I was provided a UserId number.
             </label>
             <br>
             <br>
             <label>
-                <input type = "checkbox" name = "experimentType" value = "2" onclick = "uncheckOthers('experimentType', this)"> No, I was not provided a UserId number.
+                <input type = "checkbox" name = "experimentType" value = "2" onclick = "uncheckOthers('experimentType', this)"> I accessed this page through Prolific.
             </label>
 
             <!-- Submit button -->
@@ -136,7 +136,7 @@
                 window.location.href = 'av_or_audio.html';
             }
             else{
-                window.location.href = 'laymen/experiment_introduction.html'
+                window.location.href = 'laymen/enter_user_number.html'
             }
         }
       }
