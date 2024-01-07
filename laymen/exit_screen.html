@@ -50,6 +50,12 @@
 <br>
 
 <script>
+    // prevent the user from navigating backwards through the experiment
+    history.pushState(null, document.title, location.href);
+    window.addEventListener('popstate', function (event) {
+        history.pushState(null, document.title, location.href);
+    });
+    
     function submitForm() {
         // Hide the header and instructions sections
         document.getElementById("instructionsSection").style.display = "none";

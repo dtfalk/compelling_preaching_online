@@ -44,6 +44,12 @@
 
 <script>
     let errorMessageAdded = false;
+
+    // prevent the user from navigating backwards through the experiment
+    history.pushState(null, document.title, location.href);
+        window.addEventListener('popstate', function (event) {
+        history.pushState(null, document.title, location.href);
+    });
     // Function to add an error message
     function addErrorMessage(message) {
         if (errorMessageAdded){

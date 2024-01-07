@@ -53,12 +53,26 @@
       </center>
     </form>
     <br>
+    <input type="button" value="Back" onclick="goBack()">
 
     <p id="errorMessage" style="color: red;"></p>
   </main>
   </div>
 
   <script>
+
+    // prevent the user from navigating backwards through the experiment
+    history.pushState(null, document.title, location.href);
+    window.addEventListener('popstate', function (event) {
+        history.pushState(null, document.title, location.href);
+    });
+
+    // send the user back to the previous screen
+    function goBack(){
+      window.location.href = '../expert_or_laymen.html';
+      //window.location.href = 'expert_or_laymen.html';
+    }
+
     async function validateUser() {
       const prolificId = document.getElementById('prolificid').value;
       const errorMessage = document.getElementById('errorMessage');

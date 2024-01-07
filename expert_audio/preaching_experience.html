@@ -43,6 +43,12 @@
     let submissionCount = 0;
     let errorMessageAdded = false;
 
+    // prevent the user from navigating backwards through the experiment
+    history.pushState(null, document.title, location.href);
+    window.addEventListener('popstate', function (event) {
+        history.pushState(null, document.title, location.href);
+    });
+    
     function showQuestionnaire() {
       const questionnaireContainer = document.getElementById('questionnaireContainer');
       questionnaireContainer.innerHTML = generateQuestionnaireHTML();

@@ -44,6 +44,18 @@
 
 <script>
     let errorMessageAdded = false;
+
+    // prevent the user from navigating backwards through the experiment
+    history.pushState(null, document.title, location.href);
+        window.addEventListener('popstate', function (event) {
+        history.pushState(null, document.title, location.href);
+    });
+
+    // send the user back to the previous screen
+    function goBack(){
+      window.location.href = 'expert_or_laymen.html';
+      //window.location.href = 'expert_or_laymen.html';
+    }
     // Function to add an error message
     function addErrorMessage(message) {
         if (errorMessageAdded){
@@ -83,6 +95,7 @@
                 <button onclick="submitForm()">Submit</button>
             </center>
             <br>
+            <input type="button" value="Back" onclick="goBack()">
             <br>
             `;
     }

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head onload="initialSetup()">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Psychology Experiment Instructions</title>
@@ -45,30 +45,41 @@
         }
     </style>
 </head>
-<body>
+<body id = "mainBody" onload="initialSetup()">
 
 <main id="instructionsSection">
     <p>The experiment is now over. Thank you for participating.</p>
     <p>Press the Finish button below and exit your browser to terminate the experiment.</p>
+    <br> <br> <br>
+    <center>
+        <button onclick="submitForm()">Finish</button>
+    </center> 
+<br>
 </main>
 
-<br> <br> <br>
-<center>
-    <button onclick="submitForm()">Finish</button>
-</center>
-<br>
 
 <script>
-    function submitForm() {
-        // Hide the header and instructions sections
-        document.getElementById("instructionsSection").style.display = "none";
-        // Hide the submit button
-        document.querySelector("button").style.display = "none";
-        
-
-        // redirect to the religion survey
-        //window.location.href = "religion_survey.html";
+    function initialSetup() {
+        document.getElementById("mainBody").focus();
+        preventBackNavigation();
     }
+    // prevent the user from navigating backwards through the experiment
+    function preventBackNavigation() {
+    history.pushState(null, document.title, location.href);
+    window.onpopstate = function (event) {
+        console.log("Back navigation attempted");
+        history.pushState(null, document.title, location.href);
+        };
+    }
+
+        function submitForm() {
+            // Hide the header and instructions sections
+            document.getElementById("instructionsSection").style.display = "none";
+            // Hide the submit button
+            document.querySelector("button").style.display = "none";
+            // Your existing submitForm function code
+        }
+
 </script>
 
 </body>
